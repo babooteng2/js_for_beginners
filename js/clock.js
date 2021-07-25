@@ -1,16 +1,15 @@
 const clock = document.querySelector("h2#clock");
 
-function sayHello() {
-  console.log("hello");
+function numberFormatter(num) {
+  return num.toString().padStart(2, "0");
 }
-
-setTimeout(() => {
-  sayHello();
-}, 3000);
 
 function getTime() {
   const date = new Date();
-  clock.innerText = `${date.getHours()}:${date.getMinutes()}:${date.getSeconds()}`;
+  const hours = numberFormatter(date.getHours());
+  const minutes = numberFormatter(date.getMinutes());
+  const seconds = numberFormatter(date.getSeconds());
+  clock.innerText = `${hours}:${minutes}:${seconds}`;
 }
 
 getTime();
