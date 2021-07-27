@@ -5,3 +5,7 @@ body {
 .hidden {
   display: none;
 }
+
+ul#todo-List button {
+  margin-left: 20px;
+}

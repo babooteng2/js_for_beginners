@@ -1,11 +1,28 @@
 const todoForm = document.querySelector("#todo-form");
 const todoInput = todoForm.querySelector("input");
 const todoList = document.querySelector("#todo-list");
+const TODOS_KEY = "todos";
+let todos = [];
+const savedTodos = localStorage.getItem(TODOS_KEY);
+
+if (savedTodos) {
+  const parseTodos = JSON.parse(savedTodos);
+  todos = parseTodos;
+  const max = parseTodos.length;
+  //parseTodos.forEach((item) => paintToDo(item));
+  parseTodos.forEach(paintToDo);
+}
+
+function saveTodos() {
+  localStorage.setItem(TODOS_KEY, JSON.stringify(todos));
+}
 
 function hdToDoListDelete(e) {
-  //   todoList.removeChild(e.target.parentNode);
+  const idx = todos.indexOf(e.target.parentNode.firstChild.innerText);
+  if (idx > -1) todos.splice(idx, 1);
   const li = e.target.parentNode;
   li.remove();
+  saveTodos();
 }
 
 function paintToDo(newToDo) {
@@ -24,6 +41,8 @@ function hdTodoSubmit(e) {
   e.preventDefault();
   const newToDo = todoInput.value;
   todoInput.value = "";
+  todos.push(newToDo);
+  saveTodos();
   paintToDo(newToDo);
 }
 
