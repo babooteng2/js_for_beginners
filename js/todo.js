@@ -8,7 +8,6 @@ const savedTodos = localStorage.getItem(TODOS_KEY);
 if (savedTodos) {
   const parseTodos = JSON.parse(savedTodos);
   todos = parseTodos;
-  const max = parseTodos.length;
   //parseTodos.forEach((item) => paintToDo(item));
   parseTodos.forEach(paintToDo);
 }
@@ -18,20 +17,27 @@ function saveTodos() {
 }
 
 function hdToDoListDelete(e) {
-  const idx = todos.indexOf(e.target.parentNode.firstChild.innerText);
-  if (idx > -1) todos.splice(idx, 1);
+  /* const idx = todos.indexOf(e.target.parentNode.firstChild.innerText);
+  if (idx > -1) todos.splice(idx, 1); */
+
   const li = e.target.parentNode;
+  todos = todos.filter((item) => item.id !== parseInt(li.id));
   li.remove();
   saveTodos();
 }
 
-function paintToDo(newToDo) {
+function filterItem(item) {
+  return item.id !== Number;
+}
+
+function paintToDo(newToDoObj) {
   const nodeLi = document.createElement("li");
   const nodeSpan = document.createElement("span");
   const nodeBtn = document.createElement("button");
   nodeBtn.addEventListener("click", hdToDoListDelete);
   nodeBtn.innerText = "x";
-  nodeSpan.innerText = newToDo;
+  nodeSpan.innerText = newToDoObj.text;
+  nodeLi.id = newToDoObj.id;
   nodeLi.appendChild(nodeSpan);
   nodeLi.appendChild(nodeBtn);
   todoList.appendChild(nodeLi);
@@ -39,11 +45,15 @@ function paintToDo(newToDo) {
 
 function hdTodoSubmit(e) {
   e.preventDefault();
-  const newToDo = todoInput.value;
+  const todoText = todoInput.value;
   todoInput.value = "";
-  todos.push(newToDo);
+  const newToDoObj = {
+    id: Date.now(),
+    text: todoText,
+  };
+  todos.push(newToDoObj);
   saveTodos();
-  paintToDo(newToDo);
+  paintToDo(newToDoObj);
 }
 
 todoForm.addEventListener("submit", hdTodoSubmit);
