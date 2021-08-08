@@ -1,5 +1,8 @@
 body {
   background-color: beige;
+  display: flex;
+  justify-content: space-between;
+  align-content: center;
 }
 
 .hidden {
