@@ -1,11 +1,1 @@
-body {
-  background-color: beige;
-}
-
-.hidden {
-  display: none;
-}
-
-ul#todo-List button {
-  margin-left: 20px;
-}
+body{background-color:beige;display:flex;justify-content:space-between;align-content:center}.hidden{display:none}ul#todo-List button{margin-left:20px}

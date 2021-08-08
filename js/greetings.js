@@ -1,28 +1,4 @@
-const loginForm = document.querySelector("#login-form");
-const loginInput = loginForm.querySelector("input");
-const greeting = document.querySelector("#greeting");
-const HIDDEN_CLASSNAME = "hidden";
-const USERNAME = "username";
-const savedUsername = localStorage.getItem(USERNAME);
-let username;
+(function(){function r(e,n,t){function o(i,f){if(!n[i]){if(!e[i]){var c="function"==typeof require&&require;if(!f&&c)return c(i,!0);if(u)return u(i,!0);var a=new Error("Cannot find module '"+i+"'");throw a.code="MODULE_NOT_FOUND",a}var p=n[i]={exports:{}};e[i][0].call(p.exports,function(r){var n=e[i][1][r];return o(n||r)},p,p.exports,r,e,n,t)}return n[i].exports}for(var u="function"==typeof require&&require,i=0;i<t.length;i++)o(t[i]);return o}return r})()({1:[function(require,module,exports){
+"use strict";var username,loginForm=document.querySelector("#login-form"),loginInput=loginForm.querySelector("input"),greeting=document.querySelector("#greeting"),HIDDEN_CLASSNAME="hidden",USERNAME="username",savedUsername=localStorage.getItem(USERNAME);function hdLoginSubmit(e){e.preventDefault(),username=loginInput.value,localStorage.setItem(USERNAME,username),loginForm.classList.add(HIDDEN_CLASSNAME),paintGreetings()}function paintGreetings(){username=savedUsername||loginInput.value,greeting.classList.remove(HIDDEN_CLASSNAME),greeting.innerText="Hello ".concat(username)}savedUsername?paintGreetings():(loginForm.classList.remove(HIDDEN_CLASSNAME),loginForm.addEventListener("submit",hdLoginSubmit));
 
-function hdLoginSubmit(e) {
-  e.preventDefault();
-  username = loginInput.value;
-  localStorage.setItem(USERNAME, username);
-  loginForm.classList.add(HIDDEN_CLASSNAME);
-  paintGreetings();
-}
-
-function paintGreetings() {
-  username = savedUsername ? savedUsername : loginInput.value;
-  greeting.classList.remove(HIDDEN_CLASSNAME);
-  greeting.innerText = `Hello ${username}`;
-}
-
-if (savedUsername) {
-  paintGreetings();
-} else {
-  loginForm.classList.remove(HIDDEN_CLASSNAME);
-  loginForm.addEventListener("submit", hdLoginSubmit);
-}
+},{}]},{},[1]);

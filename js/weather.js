@@ -1,11 +1,4 @@
-function onGeoSuccess(position) {
-  console.log(position);
-  console.log(position.coords.latitude, position.coords.longitude);
-  const lat = position.coords.latitude;
-  const lon = position.coords.longitude;
-}
+(function(){function r(e,n,t){function o(i,f){if(!n[i]){if(!e[i]){var c="function"==typeof require&&require;if(!f&&c)return c(i,!0);if(u)return u(i,!0);var a=new Error("Cannot find module '"+i+"'");throw a.code="MODULE_NOT_FOUND",a}var p=n[i]={exports:{}};e[i][0].call(p.exports,function(r){var n=e[i][1][r];return o(n||r)},p,p.exports,r,e,n,t)}return n[i].exports}for(var u="function"==typeof require&&require,i=0;i<t.length;i++)o(t[i]);return o}return r})()({1:[function(require,module,exports){
+"use strict";function onGeoSuccess(o){console.log(o),console.log(o.coords.latitude,o.coords.longitude);var e=o.coords.latitude,t=o.coords.longitude,n="https://api.openweathermap.org/data/2.5/weather?lat=".concat(e,"&lon=").concat(t,"&appid=79620f3550dc9b903dacf86ba015f13d&units=metric");fetch(n).then(function(o){return o.json()}).then(function(o){var e=document.getElementById("weather"),t=e.querySelector("span:first-child"),n=e.querySelector("span:last-child");console.log(o.name,o.main.temp,o.weather[0].main);var c=o.name,a=o.sys.country,r=o.main.temp,i=o.weather[0].main;n.innerText="".concat(c," @ ").concat(a),t.innerText="".concat(r," / ").concat(i)})}function onGeoError(){alert("Can't find you")}navigator.geolocation.getCurrentPosition(onGeoSuccess,onGeoError);
 
-function onGeoError() {
-  alert("Can't find you");
-}
-navigator.geolocation.getCurrentPosition(onGeoSuccess, onGeoError);
+},{}]},{},[1]);
